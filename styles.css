@@ -1,0 +1,456 @@
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #0a0a0a;
+  color: #fff;
+}
+
+.casino-background {
+  background: url("assets/img/carnaval.jpg") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+}
+
+.casino-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.casino-title {
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  color: #ffd700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 2;
+}
+
+.container-fluid {
+  position: relative;
+  z-index: 2;
+}
+
+.roulette-container {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#canvas {
+  max-width: 100%;
+  height: auto;
+  border: 5px solid #ffd700;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700;
+}
+
+.game-controls {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.game-controls .btn {
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  padding: 10px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.game-controls .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+#spin {
+  background-color: #4caf50;
+  border-color: #45a049;
+}
+
+#spin:hover {
+  background-color: #45a049;
+}
+
+#clearBets {
+  background-color: #f44336;
+  border-color: #d32f2f;
+}
+
+#clearBets:hover {
+  background-color: #d32f2f;
+}
+
+#spinAgain {
+  background-color: #2196f3;
+  border-color: #1e88e5;
+}
+
+#spinAgain:hover {
+  background-color: #1e88e5;
+}
+
+.betting-area {
+  background: rgba(0, 100, 0, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+}
+
+.mesa-container {
+  background: linear-gradient(145deg, #006400, #004d00);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 3px solid #ffd700;
+  position: relative;
+  overflow: hidden;
+}
+
+.mesa-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("assets/img/pattern.png") repeat;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.mesa-de-apuestas {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  gap: 1px;
+  background-color: #004d00;
+  padding: 1px;
+  border: 8px solid #003300;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dozens-row {
+  display: grid;
+  grid-template-columns: 40px repeat(12, 1fr);
+  gap: 1px;
+}
+
+.dozens {
+  grid-column: span 4;
+  text-align: center;
+  height: 40px;
+}
+
+.numbers-section {
+  display: grid;
+  grid-template-columns: 40px repeat(12, 1fr);
+  gap: 1px;
+}
+
+.zero-column {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.zero-column .casilla {
+  flex: 1;
+}
+
+.numbers-grid {
+  grid-column: 2 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1px;
+}
+
+.special-bets {
+  display: grid;
+  grid-template-columns: 40px repeat(6, 1fr);
+  gap: 1px;
+}
+
+.casilla {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #006400;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  min-height: 40px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-size: 0.9rem;
+  overflow: hidden;
+}
+
+.casilla.red {
+  background-color: #e81e27;
+}
+
+.casilla.black {
+  background-color: #000;
+}
+
+.casilla:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.casilla.empty {
+  pointer-events: none;
+  background-color: transparent;
+  border: none;
+}
+
+.dozens {
+  grid-column: span 4;
+}
+
+.rombo {
+  width: 30px;
+  height: 30px;
+  transform: rotate(45deg);
+  margin: 0 auto;
+}
+
+.rombo.red {
+  background-color: #e81e27;
+}
+
+.rombo.black {
+  background-color: #000;
+}
+
+.casilla.verde {
+  background-color: #006400;
+}
+
+.casilla.apostado {
+  border: 2px solid #ffd700;
+}
+
+.chip {
+  width: 25px;
+  height: 25px;
+  background: url("assets/img/ficha.png") no-repeat center center;
+  background-size: cover;
+  position: absolute;
+  bottom: 2px; /* Posición en la esquina inferior derecha */
+  right: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 0.8rem;
+  z-index: 1;
+}
+
+.casilla .remove-bet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  background: rgba(255, 0, 0, 0.7); /* Fondo rojo */
+  color: white;
+  font-size: 0.8rem;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: 2px; /* Posición en la esquina superior izquierda */
+  left: 2px;
+  z-index: 1;
+}
+
+.clear-bet {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  cursor: pointer;
+  color: #ffd700;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+
+.game-info {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 15px;
+  border: 2px solid #ffd700;
+  border-radius: 10px;
+  color: white;
+  text-align: left;
+}
+
+.spin-results-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.spin-results-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.spin-results-container li {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 767.98px) {
+  .casino-title {
+    font-size: 2rem;
+  }
+
+  .roulette-container {
+    margin-bottom: 1rem;
+  }
+
+  #canvas {
+    width: 300px;
+    height: 300px;
+  }
+
+  .game-controls {
+    padding: 10px;
+  }
+
+  .game-controls .btn {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  .mesa-container {
+    padding: 10px;
+  }
+
+  .casilla {
+    min-height: 30px;
+    font-size: 0.6rem; /* Reducir el tamaño de la fuente del número */
+  }
+
+  .chip {
+    width: 12px; /* Reducir aún más el tamaño de las fichas */
+    height: 12px;
+    font-size: 0.5rem; /* Reducir el tamaño de la fuente de las fichas */
+    bottom: 1px; /* Ajustar la posición */
+    right: 1px;
+  }
+
+  .casilla .remove-bet {
+    width: 12px; /* Reducir aún más el tamaño del símbolo "-" */
+    height: 12px;
+    font-size: 0.6rem; /* Reducir el tamaño de la fuente */
+    top: 1px; /* Ajustar la posición */
+    left: 1px;
+  }
+
+  .clear-bet {
+    width: 12px; /* Reducir aún más el tamaño del icono de la escoba */
+    height: 12px;
+    font-size: 0.5rem; /* Reducir el tamaño de la fuente */
+    top: 1px; /* Ajustar la posición */
+    left: 1px;
+  }
+
+  .game-info {
+    padding: 10px;
+  }
+
+  .spin-results-container {
+    max-height: 150px;
+  }
+
+  .balance-container p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Ajustes para tablets */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .casino-title {
+    font-size: 2.5rem;
+  }
+
+  #canvas {
+    width: 400px;
+    height: 400px;
+  }
+
+  .game-controls {
+    padding: 15px;
+  }
+
+  .game-controls .btn {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .mesa-container {
+    padding: 15px;
+  }
+
+  .casilla {
+    min-height: 35px;
+    font-size: 0.7rem; /* Reducir el tamaño de la fuente del número */
+  }
+
+  .chip {
+    width: 14px; /* Reducir aún más el tamaño de las fichas */
+    height: 14px;
+    font-size: 0.6rem; /* Reducir el tamaño de la fuente de las fichas */
+    bottom: 2px; /* Ajustar la posición */
+    right: 2px;
+  }
+
+  .casilla .remove-bet {
+    width: 14px; /* Reducir aún más el tamaño del símbolo "-" */
+    height: 14px;
+    font-size: 0.7rem; /* Reducir el tamaño de la fuente */
+    top: 2px; /* Ajustar la posición */
+    left: 2px;
+  }
+
+  .clear-bet {
+    width: 14px; /* Reducir aún más el tamaño del icono de la escoba */
+    height: 14px;
+    font-size: 0.6rem; /* Reducir el tamaño de la fuente */
+    top: 2px; /* Ajustar la posición */
+    left: 2px;
+  }
+
+  .game-info {
+    padding: 15px;
+  }
+
+  .spin-results-container {
+    max-height: 200px;
+  }
+
+  .balance-container p {
+    font-size: 1rem;
+  }
+}

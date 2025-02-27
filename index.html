@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruleta</title>
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="casino-background">
+    <header class="text-center py-4">
+    </header>
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Columna central: Ruleta -->
+        <div class="col-lg-6 order-lg-1 order-1">
+          <div class="roulette-container text-center">
+            <canvas id="canvas" width="500" height="500"></canvas>
+          </div>
+        </div>
+
+        <!-- Columna izquierda: Controles de juego -->
+        <div class="col-lg-3 order-lg-2 order-3">
+          <div class="game-controls">
+            <div class="chip-selection mb-3">
+              <label for="chipAmount" class="form-label"><i class="fas fa-coins"></i> Selecciona tu ficha:</label>
+              <select id="chipAmount" class="form-select">
+                <option value="1">1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+            <button id="spin" class="btn btn-primary btn-lg mb-2"><i class="fas fa-sync-alt"></i> Girar Ruleta</button>
+            <button id="clearBets" class="btn btn-warning mb-2"><i class="fas fa-broom"></i> Limpiar Apuestas</button>
+            <button id="spinAgain" class="btn btn-success mb-2" style="display: none;"><i class="fas fa-redo"></i> Otra Vez</button>
+          </div>
+        </div>
+
+        <!-- Columna derecha: Información del juego -->
+        <div class="col-lg-3 order-lg-3 order-2">
+          <div class="game-info">
+            <div class="spin-results-container mb-4">
+              <h4><i class="fas fa-history"></i> Resultados de la Tirada</h4>
+              <ul id="spinResults"></ul>
+            </div>
+            <div class="balance-container">
+              <h4><i class="fas fa-coins"></i> Balance de la Partida</h4>
+              <p>Fichas Ganadas: <span id="chipsWon">0</span></p>
+              <p>Fichas Perdidas: <span id="chipsLost">0</span></p>
+              <p>Balance Total: <span id="totalBalance">0</span></p>
+              <button id="resetGame" class="btn btn-danger btn-sm"><i class="fas fa-redo"></i> Reiniciar Partida</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mesa de apuestas -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="betting-area">
+            <div class="mesa-container">
+              <div class="mesa-de-apuestas"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="ruleta.js"></script>
+
+  <!-- Sonidos -->
+  <audio id="ruletaSound" src="assets/sounds/ruleta.mp3"></audio>
+  <audio id="winSound" src="assets/sounds/win.mp3"></audio>
+  <audio id="chipsSound" src="assets/sounds/chips.mp3"></audio>
+
+</body>
+</html>
