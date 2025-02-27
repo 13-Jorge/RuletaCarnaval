@@ -1,43 +1,42 @@
 $(document).ready(() => {
     var options = [
       "0",
-      "28",
-      "9",
-      "26",
-      "30",
-      "11",
-      "7",
-      "20",
       "32",
-      "17",
-      "5",
-      "22",
-      "34",
       "15",
-      "3",
-      "24",
-      "36",
-      "13",
-      "1",
-      "00",
-      "27",
-      "10",
-      "25",
-      "29",
-      "12",
-      "8",
       "19",
-      "31",
-      "18",
-      "6",
-      "21",
-      "33",
-      "16",
       "4",
-      "23",
-      "35",
-      "14",
+      "21",
       "2",
+      "25",
+      "17",
+      "34",
+      "6",
+      "27",
+      "13",
+      "36",
+      "11",
+      "30",
+      "8",
+      "23",
+      "10",
+      "5",
+      "24",
+      "16",
+      "33",
+      "1",
+      "20",
+      "14",
+      "31",
+      "9",
+      "22",
+      "18",
+      "29",
+      "7",
+      "28",
+      "12",
+      "35",
+      "3",
+      "26"
     ]
   
     var startAngle = 0
@@ -93,7 +92,7 @@ $(document).ready(() => {
     }
   
     function getColor(number) {
-      if (number === "0" || number === "00") return "green"
+      if (number === "0") return "green"
       var redNumbers = [
         "9",
         "30",
@@ -123,27 +122,22 @@ $(document).ready(() => {
           isOdd: false,
           isInFirstHalf: false,
           isInSecondHalf: false,
-          dozen: null,
-          isDoubleZero: false
+          dozen: null
       };
   
-      if (number === "00") {
-          properties.isDoubleZero = true;
-      } else {
-          const num = parseInt(number);
-          if (!isNaN(num)) {
-              properties.isEven = num % 2 === 0;
-              properties.isOdd = !properties.isEven;
-              properties.isInFirstHalf = num >= 1 && num <= 18;
-              properties.isInSecondHalf = num >= 19 && num <= 36;
+      const num = parseInt(number);
+      if (!isNaN(num)) {
+          properties.isEven = num % 2 === 0;
+          properties.isOdd = !properties.isEven;
+          properties.isInFirstHalf = num >= 1 && num <= 18;
+          properties.isInSecondHalf = num >= 19 && num <= 36;
   
-              if (num >= 1 && num <= 12) {
-                  properties.dozen = "1st 12";
-              } else if (num >= 13 && num <= 24) {
-                  properties.dozen = "2nd 12";
-              } else if (num >= 25 && num <= 36) {
-                  properties.dozen = "3rd 12";
-              }
+          if (num >= 1 && num <= 12) {
+              properties.dozen = "1st 12";
+          } else if (num >= 13 && num <= 24) {
+              properties.dozen = "2nd 12";
+          } else if (num >= 25 && num <= 36) {
+              properties.dozen = "3rd 12";
           }
       }
   
@@ -292,8 +286,7 @@ $(document).ready(() => {
   
       // Zero column
       const zeroColumn = $('<div class="zero-column"></div>')
-      zeroColumn.append('<button class="casilla verde" data-numero="0">0</button>')
-      zeroColumn.append('<button class="casilla verde" data-numero="00">00</button>')
+      zeroColumn.append('<button class="casilla verde" data-numero="0">0</button>') // Only one zero
       numbersSection.append(zeroColumn)
   
       // Numbers grid
