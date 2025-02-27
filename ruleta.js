@@ -210,7 +210,7 @@ $(document).ready(() => {
           let winnings = 0;
     
           if (betNumber == winningNumber) {
-            winnings = chipCount * 17; // Reduced factor for straight-up bet
+            winnings = chipCount * 36; 
           } else if (betNumber == "red" && getColor(winningNumber) == "red") {
             winnings = chipCount * 1;
           } else if (betNumber == "black" && getColor(winningNumber) == "black") {
