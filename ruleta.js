@@ -194,62 +194,61 @@ $(document).ready(() => {
       resultsContainer.append(`<li><strong>Balance de la Tirada: ${balanceText}</strong></li>`)
     }
   
-    const checkWinningBets = (winningNumber) => {
+    function checkWinningBets(winningNumber) {
       let spinResults = [];
       let chipsWon = 0;
       let chipsLost = 0;
-
+    
       const winningProperties = checkNumberProperties(winningNumber);
-
+    
       $(".casilla").each(function () {
-          const casilla = $(this);
-          const betNumber = casilla.data("numero");
-          const chipCount = casilla.data("chipCount") || 0;
-
-          if (chipCount > 0) {
-              let winnings = 0;
-
-              if (betNumber == winningNumber) {
-                  winnings = chipCount * 17; // Reduced factor for straight-up bet
-              } else if (betNumber == "red" && getColor(winningNumber) == "red") {
-                  winnings = chipCount * 1;
-              } else if (betNumber == "black" && getColor(winningNumber) == "black") {
-                  winnings = chipCount * 1;
-              } else if (betNumber == "par" && winningProperties.isEven) {
-                  winnings = chipCount * 1;
-              } else if (betNumber == "impar" && winningProperties.isOdd) {
-                  winnings = chipCount * 1;
-              } else if (betNumber == "1-18" && winningProperties.isInFirstHalf) {
-                  winnings = chipCount * 1;
-              } else if (betNumber == "19-36" && winningProperties.isInSecondHalf) {
-                  winnings = chipCount * 1;
-              } else if (betNumber == "1st 12" && winningProperties.dozen === "1st 12") {
-                  winnings = chipCount * 2;
-              } else if (betNumber == "2nd 12" && winningProperties.dozen === "2nd 12") {
-                  winnings = chipCount * 2;
-              } else if (betNumber == "3rd 12" && winningProperties.dozen === "3rd 12") {
-                  winnings = chipCount * 2;
-              }
-
-              if (winnings > 0) {
-                  chipsWon += winnings;
-                  spinResults.push(`Ganaste ${winnings} fichas en ${betNumber}`);
-              } else {
-                  chipsLost += chipCount;
-                  spinResults.push(`Perdiste ${chipCount} fichas en ${betNumber}`);
-              }
+        const casilla = $(this);
+        const betNumber = casilla.data("numero");
+        const chipCount = casilla.data("chipCount") || 0;
+    
+        if (chipCount > 0) {
+          let winnings = 0;
+    
+          if (betNumber == winningNumber) {
+            winnings = chipCount * 17; // Reduced factor for straight-up bet
+          } else if (betNumber == "red" && getColor(winningNumber) == "red") {
+            winnings = chipCount * 1;
+          } else if (betNumber == "black" && getColor(winningNumber) == "black") {
+            winnings = chipCount * 1;
+          } else if (betNumber == "par" && winningProperties.isEven) {
+            winnings = chipCount * 1;
+          } else if (betNumber == "impar" && winningProperties.isOdd) {
+            winnings = chipCount * 1;
+          } else if (betNumber == "1-18" && winningProperties.isInFirstHalf) {
+            winnings = chipCount * 1;
+          } else if (betNumber == "19-36" && winningProperties.isInSecondHalf) {
+            winnings = chipCount * 1;
+          } else if (betNumber == "1st 12" && winningProperties.dozen === "1st 12") {
+            winnings = chipCount * 2;
+          } else if (betNumber == "2nd 12" && winningProperties.dozen === "2nd 12") {
+            winnings = chipCount * 2;
+          } else if (betNumber == "3rd 12" && winningProperties.dozen === "3rd 12") {
+            winnings = chipCount * 2;
           }
+    
+          if (winnings > 0) {
+            chipsWon += winnings;
+            spinResults.push(`Ganaste ${winnings} ${winnings === 1 ? 'ficha' : 'fichas'} en ${betNumber}`);
+          } else {
+            chipsLost += chipCount;
+            spinResults.push(`Perdiste ${chipCount} ${chipCount === 1 ? 'ficha' : 'fichas'} en ${betNumber}`);
+          }
+        }
       });
-
+    
       totalChipsWon += chipsWon;
       totalChipsLost += chipsLost;
       const balanceChange = chipsWon - chipsLost;
       totalBalance += balanceChange;
-
+    
       updateBalanceDisplay();
       updateSpinResultsDisplay(spinResults, balanceChange);
-  };
-
+    }
   
     function stopRotateWheel() {
       clearTimeout(spinTimeout)
