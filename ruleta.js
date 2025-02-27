@@ -210,7 +210,7 @@ $(document).ready(() => {
           let winnings = 0;
     
           if (betNumber == winningNumber) {
-            winnings = chipCount * 36; 
+            winnings = chipCount * 35; 
           } else if (betNumber == "red" && getColor(winningNumber) == "red") {
             winnings = chipCount * 1;
           } else if (betNumber == "black" && getColor(winningNumber) == "black") {
